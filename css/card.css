@@ -24,10 +24,21 @@
   background: var(--color-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 0 16px 16px;
   box-shadow: var(--shadow-sm);
   transition: transform 0.12s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   outline: none;
+  overflow: hidden;
+}
+
+/* ------- トップ画像 ------- */
+.card__img {
+  display: block;
+  width: calc(100% + 32px);
+  margin: 0 -16px 12px;
+  height: 148px;
+  object-fit: cover;
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 .card:hover {
   transform: translateY(-3px);
@@ -41,7 +52,6 @@
 .card--in_progress { border-left: 4px solid var(--color-warning); }
 
 .card__header { display: flex; align-items: center; gap: 8px; }
-.card__icon { font-size: 1.5rem; line-height: 1; }
 .card__difficulty {
   font-size: 0.78rem; color: var(--color-primary); letter-spacing: 1px; font-weight: 700;
 }

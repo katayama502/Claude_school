@@ -88,9 +88,16 @@ const UI = (() => {
         'aria-label': `${topic.titleJa} の詳細を開く` },
     });
 
-    // ヘッダー：アイコン + 難易度
+    // トップ画像
+    const img = document.createElement('img');
+    img.className = 'card__img';
+    img.src = `img/${topic.id}.png`;
+    img.alt = '';
+    img.setAttribute('aria-hidden', 'true');
+    card.appendChild(img);
+
+    // ヘッダー：難易度 + 状態バッジ
     const header = el('div', { class: 'card__header' }, [
-      el('span', { class: 'card__icon', text: topic.icon }),
       el('span', { class: 'card__difficulty',
         attrs: { title: `難易度 ${topic.difficulty}` },
         text: DIFFICULTY_LABELS[topic.difficulty] }),
@@ -116,7 +123,7 @@ const UI = (() => {
     // カテゴリタグ
     card.appendChild(
       el('span', { class: `card__cat card__cat--${topic.category}`,
-        text: `${cat.icon} ${cat.labelJa}` })
+        text: cat.labelJa })
     );
 
     // タイトル・説明
@@ -126,7 +133,7 @@ const UI = (() => {
 
     // フッター：推定時間 + 詳細
     const footer = el('div', { class: 'card__footer' }, [
-      el('span', { class: 'card__time', text: `⏱ 約${topic.estimatedMinutes}分` }),
+      el('span', { class: 'card__time', text: `約${topic.estimatedMinutes}分` }),
       el('span', { class: 'card__detail-link', text: '詳細 →' }),
     ]);
     card.appendChild(footer);

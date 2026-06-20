@@ -275,6 +275,11 @@ const UI = (() => {
     // 状態更新ボタン群
     frag.appendChild(buildStatusControls(topic, status));
 
+    // 日本語学習コンテンツ
+    if (topic.contentJa) {
+      frag.appendChild(buildContentJa(topic.contentJa));
+    }
+
     // 前提トピック
     if (topic.prerequisites.length) {
       const pre = el('div', { class: 'modal__prereq' }, [
@@ -322,6 +327,62 @@ const UI = (() => {
     // 前後ナビゲーション
     frag.appendChild(buildPrevNext(topic));
     return frag;
+  }
+
+  /* ------- 日本語コンテンツセクション ------- */
+  function buildContentJa(c) {
+    const wrap = el('div', { class: 'content-ja' });
+
+    // 詳細解説
+    if (c.detailJa) {
+      wrap.appendChild(el('div', { class: 'content-ja__section' }, [
+        el('h3', { class: 'content-ja__title', text: '📘 詳細解説' }),
+        buildRichText(c.detailJa),
+      ]));
+    }
+
+    // 3カラムグリッド（重要ポイント / 学べること / ユースケース）
+    const grid = el('div', { class: 'content-ja__grid' });
+
+    if (c.keyPoints && c.keyPoints.length) {
+      grid.appendChild(buildListCard('🔑 重要ポイント', c.keyPoints, 'key'));
+    }
+    if (c.whatYouLearn && c.whatYouLearn.length) {
+      grid.appendChild(buildListCard('✅ 学べること', c.whatYouLearn, 'learn'));
+    }
+    if (c.useCases && c.useCases.length) {
+      grid.appendChild(buildListCard('💼 ユースケース', c.useCases, 'use'));
+    }
+
+    if (grid.children.length) wrap.appendChild(grid);
+    return wrap;
+  }
+
+  function buildListCard(title, items, mod) {
+    const card = el('div', { class: `cj-card cj-card--${mod}` });
+    card.appendChild(el('h4', { class: 'cj-card__title', text: title }));
+    const ul = el('ul', { class: 'cj-card__list' });
+    items.forEach((item) => ul.appendChild(el('li', { text: item })));
+    card.appendChild(ul);
+    return card;
+  }
+
+  /* **太字** を <strong> に変換する軽量レンダラー（XSS安全・限定的markdown） */
+  function buildRichText(text) {
+    const p = document.createElement('p');
+    p.className = 'content-ja__detail';
+    // **text** → <strong>text</strong> のみ許可、他は textContent として処理
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    parts.forEach((part) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        const strong = document.createElement('strong');
+        strong.textContent = part.slice(2, -2);
+        p.appendChild(strong);
+      } else {
+        p.appendChild(document.createTextNode(part));
+      }
+    });
+    return p;
   }
 
   function buildStatusControls(topic, status) {

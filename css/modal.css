@@ -120,3 +120,74 @@
   .modal { padding: 18px 16px 24px; }
   .modal__nav-btn { max-width: 100%; }
 }
+
+/* =====================================================================
+ * 日本語学習コンテンツセクション（content-ja）
+ * ===================================================================== */
+.content-ja {
+  margin-top: 20px;
+  border-top: 2px solid var(--color-primary-light);
+  padding-top: 18px;
+  display: grid;
+  gap: 14px;
+}
+
+.content-ja__section { display: grid; gap: 8px; }
+
+.content-ja__title {
+  font-size: 0.95rem; font-weight: 800;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.content-ja__detail {
+  font-size: 0.88rem; line-height: 1.85; color: var(--color-text);
+  background: var(--color-gray-light);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px; margin: 0;
+  white-space: pre-wrap;
+}
+
+/* 3カラムグリッド */
+.content-ja__grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 600px) {
+  .content-ja__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* 各カード */
+.cj-card {
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+}
+.cj-card--key { border-top: 3px solid var(--color-primary); }
+.cj-card--learn { border-top: 3px solid var(--color-success); }
+.cj-card--use { border-top: 3px solid #2563EB; }
+
+.cj-card__title {
+  font-size: 0.8rem; font-weight: 800; margin-bottom: 8px;
+}
+.cj-card--key .cj-card__title { color: var(--color-primary); }
+.cj-card--learn .cj-card__title { color: var(--color-success); }
+.cj-card--use .cj-card__title { color: #2563EB; }
+
+.cj-card__list {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 5px;
+}
+.cj-card__list li {
+  font-size: 0.79rem; line-height: 1.55; color: var(--color-text);
+  padding-left: 14px; position: relative;
+}
+.cj-card__list li::before {
+  content: '·'; position: absolute; left: 2px;
+  color: var(--color-text-muted); font-weight: 900;
+}
+
+@media (prefers-color-scheme: dark) {
+  .cj-card--use .cj-card__title { color: #93C5FD; }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Anthropic Academy 日本語版 — Claude の学習リソースを項目ごとにカード表示し、進捗管理・推奨学習フローを提供する非公式ローカライズ学習サイト。" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Anthropic Academy 日本語版 — Claude 学習ハブ</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/card.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+</head>
+<body>
+  <!-- ===== ヘッダー ===== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <div class="site-header__brand">
+        <span class="site-header__logo" aria-hidden="true">✻</span>
+        <div>
+          <h1 class="site-header__title">Anthropic Academy <span>日本語版</span></h1>
+          <p class="site-header__subtitle">Claude を学ぶ・進捗を管理する学習ハブ</p>
+        </div>
+      </div>
+
+      <div class="site-header__actions">
+        <nav class="usertype-tabs" id="usertype-tabs" aria-label="ユーザー属性の選択"></nav>
+        <button class="btn btn--ghost btn--sm" type="button" data-action="reset">進捗をリセット</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ===== 学習フローバナー ===== -->
+    <section class="flow-banner" id="flow-visualizer" aria-label="推奨学習フロー"></section>
+
+    <!-- ===== フィルタ行 ===== -->
+    <section class="controls">
+      <nav class="category-tabs" id="category-tabs" aria-label="カテゴリの切り替え"></nav>
+      <div class="controls__filters">
+        <label class="visually-hidden" for="difficulty-filter">難易度フィルタ</label>
+        <select id="difficulty-filter" class="select"></select>
+        <label class="visually-hidden" for="status-filter">状態フィルタ</label>
+        <select id="status-filter" class="select"></select>
+      </div>
+    </section>
+
+    <!-- ===== カードグリッド ===== -->
+    <section class="card-grid" id="card-grid" aria-label="学習トピック一覧"></section>
+  </main>
+
+  <!-- ===== フッター：進捗ダッシュボード ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <section class="dashboard" id="dashboard" aria-label="学習進捗サマリー"></section>
+      <div class="site-footer__links">
+        <a href="https://www.anthropic.com/learn" target="_blank" rel="noopener noreferrer">公式 Learn ページ ↗</a>
+        <a href="https://docs.anthropic.com/en/home" target="_blank" rel="noopener noreferrer">公式ドキュメント ↗</a>
+        <a href="https://anthropic.skilljar.com/" target="_blank" rel="noopener noreferrer">Anthropic Academy（コース）↗</a>
+      </div>
+      <p class="site-footer__note">
+        本サイトは Anthropic 公式コンテンツの学習体験向上を目的とした非公式ローカライズです。
+        リンク先はすべて Anthropic 公式リソースです。進捗データは Cookie にのみ保存され、外部送信は行いません。
+      </p>
+    </div>
+  </footer>
+
+  <!-- ===== 詳細モーダル ===== -->
+  <div class="modal-overlay" id="modal-overlay" hidden role="dialog" aria-modal="true" aria-label="トピック詳細">
+    <div class="modal">
+      <button class="modal__close" id="modal-close" type="button" aria-label="閉じる">← 戻る</button>
+      <div class="modal__body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ===== ウェルカムモーダル ===== -->
+  <div class="modal-overlay welcome-overlay" id="welcome-overlay" hidden role="dialog" aria-modal="true" aria-label="ようこそ">
+    <div class="modal welcome">
+      <div class="modal__body" id="welcome-body"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/cookie.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
